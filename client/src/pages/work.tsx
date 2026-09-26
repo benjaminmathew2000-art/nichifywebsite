@@ -40,6 +40,23 @@ export default function Work() {
       services: ['Strategy', 'Creative Direction', 'Brand Development', 'Campaign Execution'],
       takeaway: 'True excellence emerges when creative vision meets strategic collaboration, delivering results that exceed expectations.',
       pdfUrl: collaborativeExcellencePdf
+    },
+    {
+      id: 'memorable',
+      title: 'Product Marketing Case Study',
+      client: 'Memorable × Nichify',
+      tagline: '"You talk. We remember."',
+      tags: ['#ProductMarketing', '#GenAI', '#AppleEcosystem', '#SecondBrain'],
+      question: 'How do you make an AI memory companion feel instantly useful to people whose brains already have too many tabs open?',
+      challenge: 'Conversations, ideas and decisions happen in real time and disappear just as fast. The job was to turn an abstract AI product into a simple, relatable promise for iPhone and Apple Watch users.',
+      results: [
+        { metric: 'Talk', label: 'Captured in real time' },
+        { metric: 'Remember', label: 'AI summaries' },
+        { metric: 'Recall', label: 'Anything, anytime' }
+      ],
+      services: ['Product Marketing', 'Messaging & Positioning', 'Launch Content', 'Social Media'],
+      takeaway: 'A complex AI product lands when it is reduced to a promise people already want: you talk, we remember, you recall anything, anytime.',
+      postUrl: 'https://www.linkedin.com/feed/update/urn:li:ugcPost:7446823821069791232/'
     }
   ];
 
@@ -120,15 +137,28 @@ export default function Work() {
 
                 {/* Card Footer */}
                 <div className="px-6 pb-6">
-                  <a
-                    href={study.pdfUrl}
-                    download
-                    className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-lg text-sm hover:bg-gray-800 transition-colors"
-                    data-testid={`download-${study.id}`}
-                  >
-                    <Download className="w-4 h-4" />
-                    Download Case Study
-                  </a>
+                  {'pdfUrl' in study ? (
+                    <a
+                      href={study.pdfUrl}
+                      download
+                      className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-lg text-sm hover:bg-gray-800 transition-colors"
+                      data-testid={`download-${study.id}`}
+                    >
+                      <Download className="w-4 h-4" />
+                      Download Case Study
+                    </a>
+                  ) : (
+                    <a
+                      href={study.postUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-lg text-sm hover:bg-gray-800 transition-colors"
+                      data-testid={`view-${study.id}`}
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      View on LinkedIn
+                    </a>
+                  )}
                 </div>
               </article>
             ))}
