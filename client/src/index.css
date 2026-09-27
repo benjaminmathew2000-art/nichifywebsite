@@ -303,24 +303,25 @@
   100% { background-position: 300% 50%; }
 }
 
-/* One-shot wave on page load: starts black, sweeps the rainbow through once, ends black at 2.4s */
+/* One-shot wave on page load, ending black at 2.4s. Color spacing and speed match
+   .rainbow-text-hover:hover exactly (one color every 0.375 word-widths, moving 1.5
+   word-widths/s). The wave runs red -> indigo so it finishes blue -> purple -> black.
+   Image is 4.6 word-widths wide and slides 3.6 word-widths (1.5/s x 2.4s). */
 .rainbow-intro {
   background: linear-gradient(90deg,
     black 0%,
-    black 30%,
-    var(--rainbow-red) 35%,
-    var(--rainbow-orange) 38.5%,
-    var(--rainbow-yellow) 42%,
-    var(--rainbow-green) 45.5%,
-    var(--rainbow-cyan) 49%,
-    var(--rainbow-blue) 52.5%,
-    var(--rainbow-indigo) 56%,
-    var(--rainbow-violet) 59.5%,
-    var(--rainbow-pink) 63%,
-    black 68%,
+    black 13.043%,
+    var(--rainbow-red) 21.196%,
+    var(--rainbow-orange) 29.348%,
+    var(--rainbow-yellow) 37.5%,
+    var(--rainbow-green) 45.652%,
+    var(--rainbow-cyan) 53.804%,
+    var(--rainbow-blue) 61.957%,
+    var(--rainbow-indigo) 70.109%,
+    black 78.261%,
     black 100%
   );
-  background-size: 300% 100%;
+  background-size: 460% 100%;
   background-position: 0% 50%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
