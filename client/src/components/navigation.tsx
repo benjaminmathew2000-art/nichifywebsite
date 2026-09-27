@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Menu, X } from 'lucide-react';
 import headerLogoImage from '@assets/n_1766139109014.png';
+import fullLogoImage from '@assets/Brand_Kit__1766138799599.png';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,11 +33,19 @@ export function Navigation() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/">
-            <img 
-              src={headerLogoImage} 
-              alt="nichify." 
-              className="h-8 w-auto cursor-pointer"
-              data-testid="nav-logo"
+            {/* Full logo on desktop */}
+            <img
+              src={fullLogoImage}
+              alt="nichify."
+              className="hidden md:block h-12 w-auto cursor-pointer"
+              data-testid="nav-logo-desktop"
+            />
+            {/* Small "n" icon on mobile */}
+            <img
+              src={headerLogoImage}
+              alt="nichify."
+              className="block md:hidden h-7 w-auto cursor-pointer"
+              data-testid="nav-logo-mobile"
             />
           </Link>
 
