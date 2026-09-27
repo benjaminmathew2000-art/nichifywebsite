@@ -1,9 +1,18 @@
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
+import { SlidePreview, VideoPreview } from '@/components/case-study-preview';
 import { ArrowLeft, Download, ExternalLink } from 'lucide-react';
 import { Link } from 'wouter';
 import californiaBurritoPdf from '@assets/QUESADILA_FRENZY_-_A_Nichify_Case_Study_1766139538734.pdf';
 import collaborativeExcellencePdf from '@assets/Collaborative_Excellence_by_Nichify_1766139547440.pdf';
+
+// Slides are pre-rendered from the case study PDFs (one JPG per page) so they load fast in the browser.
+const slideImages = import.meta.glob<string>('@assets/slides/*.jpg', { eager: true, import: 'default' });
+const slidesFor = (prefix: string) =>
+  Object.keys(slideImages)
+    .filter((path) => path.includes(`/slides/${prefix}-`))
+    .sort()
+    .map((path) => slideImages[path]);
 
 export default function Work() {
   const caseStudies = [
@@ -22,7 +31,8 @@ export default function Work() {
       ],
       services: ['Content Strategy', 'Social Media Consulting', 'Video Production', 'Creative Consultancy'],
       takeaway: 'Success lies in transformation: turning a simple food item into a cultural moment that resonates with youth, creates lasting engagement, and builds authentic brand connections.',
-      pdfUrl: californiaBurritoPdf
+      pdfUrl: californiaBurritoPdf,
+      slides: slidesFor('quesadilla-frenzy')
     },
     {
       id: 'collaborative-excellence',
@@ -39,7 +49,8 @@ export default function Work() {
       ],
       services: ['Strategy', 'Creative Direction', 'Brand Development', 'Campaign Execution'],
       takeaway: 'True excellence emerges when creative vision meets strategic collaboration, delivering results that exceed expectations.',
-      pdfUrl: collaborativeExcellencePdf
+      pdfUrl: collaborativeExcellencePdf,
+      slides: slidesFor('collaborative-excellence')
     },
     {
       id: 'memorable',
@@ -56,7 +67,8 @@ export default function Work() {
       ],
       services: ['Product Marketing', 'Messaging & Positioning', 'Launch Content', 'Social Media'],
       takeaway: 'A complex AI product lands when it is reduced to a promise people already want: you talk, we remember, you recall anything, anytime.',
-      postUrl: 'https://www.linkedin.com/feed/update/urn:li:ugcPost:7446823821069791232/'
+      postUrl: 'https://www.linkedin.com/feed/update/urn:li:ugcPost:7446823821069791232/',
+      embedUrl: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7446823821069791232?compact=1'
     }
   ];
 
@@ -94,6 +106,13 @@ export default function Work() {
                   <h2 className="text-2xl font-bold leading-tight mb-1">{study.title}</h2>
                   <p className="text-sm text-gray-400">{study.client}</p>
                 </div>
+
+                {/* Preview */}
+                {study.slides ? (
+                  <SlidePreview slides={study.slides} title={study.title} />
+                ) : study.embedUrl ? (
+                  <VideoPreview embedUrl={study.embedUrl} title={`${study.client}: ${study.title}`} />
+                ) : null}
 
                 {/* Results Bar */}
                 <div className="grid grid-cols-3 divide-x divide-gray-200 border-b border-gray-200 bg-gray-50">
@@ -152,11 +171,11 @@ export default function Work() {
                       href={study.postUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 bg-black text-white px-5 py-2.5 rounded-lg text-sm hover:bg-gray-800 transition-colors"
+                      className="inline-flex items-center gap-2 border border-gray-300 text-gray-700 px-5 py-2.5 rounded-lg text-sm hover:border-black hover:text-black transition-colors"
                       data-testid={`view-${study.id}`}
                     >
                       <ExternalLink className="w-4 h-4" />
-                      View on LinkedIn
+                      Open on LinkedIn
                     </a>
                   )}
                 </div>
