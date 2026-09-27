@@ -32,7 +32,7 @@ export function HeroSection() {
             we are black&white
             <br />
             so you can be{' '}
-            <RainbowText hover>colorful</RainbowText>
+            <RainbowText hover intro>colorful</RainbowText>
           </p>
         </div>
         

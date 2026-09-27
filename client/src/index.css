@@ -303,6 +303,36 @@
   100% { background-position: 300% 50%; }
 }
 
+/* One-shot wave on page load: starts black, sweeps the rainbow through once, ends black at 2.4s */
+.rainbow-intro {
+  background: linear-gradient(90deg,
+    black 0%,
+    black 30%,
+    var(--rainbow-red) 35%,
+    var(--rainbow-orange) 38.5%,
+    var(--rainbow-yellow) 42%,
+    var(--rainbow-green) 45.5%,
+    var(--rainbow-cyan) 49%,
+    var(--rainbow-blue) 52.5%,
+    var(--rainbow-indigo) 56%,
+    var(--rainbow-violet) 59.5%,
+    var(--rainbow-pink) 63%,
+    black 68%,
+    black 100%
+  );
+  background-size: 300% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbow-intro-wave 2.4s linear forwards;
+}
+
+@keyframes rainbow-intro-wave {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
 /* Enhanced animations */
 @keyframes pulse-rainbow {
   0%, 100% { 
